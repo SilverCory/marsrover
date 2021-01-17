@@ -74,7 +74,7 @@ func TestLocation_String(t *testing.T) {
 		{"Valid_LocationEast", locationEast, "1 2 E"},
 		{"Valid_LocationSouth", locationSouth, "1 2 S"},
 		{"Valid_LocationWest", locationWest, "1 2 W"},
-		{"Valid_Location0", locationEmpty, "0 0 Orientation{0}"},
+		{"Valid_LocationEmpty", locationEmpty, "0 0 Orientation{0}"},
 	}
 
 	for _, v := range locationStringTestCases {

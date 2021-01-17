@@ -6,6 +6,8 @@ import (
 )
 
 var (
+	// ErrorInvalidOrientation occurs when the orientation is not one of:
+	// 		OrientationNorth, OrientationEast, OrientationSouth, or OrientationWest.
 	ErrorInvalidOrientation = errors.New("invalid orientation")
 )
 

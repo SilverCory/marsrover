@@ -6,6 +6,7 @@ import (
 )
 
 var (
+	// ErrorLocationOutOfBounds occurs when location is invalid and is outside of it's defined perimeter.
 	ErrorLocationOutOfBounds = errors.New("location out of bounds")
 )
 

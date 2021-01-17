@@ -3,6 +3,7 @@ package movement
 import "errors"
 
 var (
+	// ErrorInvalidDirection occurs when the direction is neither DirectionLeft or DirectionRight.
 	ErrorInvalidDirection = errors.New("invalid direction")
 )
 
