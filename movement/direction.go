@@ -15,6 +15,8 @@ const (
 	_ Direction = iota
 	DirectionLeft
 	DirectionRight
+	// Deprecated DirectionFront is only for use with the interpreter.
+	DirectionFront
 )
 
 // Validate will ensure the direction is valid for use.

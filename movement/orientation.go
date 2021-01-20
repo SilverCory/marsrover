@@ -3,6 +3,7 @@ package movement
 import (
 	"errors"
 	"fmt"
+	"strings"
 )
 
 var (
@@ -45,5 +46,23 @@ func (o Orientation) String() string {
 		return "W"
 	default:
 		return fmt.Sprintf("Orientation{%d}", o)
+	}
+}
+
+func OrientationFromString(s string) (Orientation, error) {
+	s = strings.TrimSpace(s)
+	s = strings.ToUpper(s)
+
+	switch s {
+	case "N":
+		return OrientationNorth, nil
+	case "E":
+		return OrientationEast, nil
+	case "S":
+		return OrientationSouth, nil
+	case "W":
+		return OrientationWest, nil
+	default:
+		return 0, ErrorInvalidOrientation
 	}
 }
