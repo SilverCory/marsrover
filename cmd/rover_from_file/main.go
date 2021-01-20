@@ -1,10 +1,10 @@
 package main
 
 import (
-	"MarsRover"
 	"flag"
 	"fmt"
 	"io"
+	"marsrover"
 	"os"
 	"os/signal"
 	"syscall"
@@ -33,7 +33,7 @@ Can be set to @std to read from the terminal input.`)
 		}
 	}
 
-	var executor = MarsRover.NewExecutor(reader)
+	var executor = marsrover.NewExecutor(reader)
 
 	go func() {
 		sc := make(chan os.Signal, 1)
@@ -47,14 +47,14 @@ Can be set to @std to read from the terminal input.`)
 		os.Exit(0)
 	}()
 
-	for err != MarsRover.ErrorEndOfInstructions {
+	for err != marsrover.ErrorEndOfInstructions {
 
 		if inputFile == "@std" {
 			fmt.Print("> ")
 		}
 
 		err = executor.Tick()
-		if err != nil && err != MarsRover.ErrorEndOfInstructions {
+		if err != nil && err != marsrover.ErrorEndOfInstructions {
 			_, _ = fmt.Fprintf(os.Stderr, "Tick: %s\n", err)
 		}
 	}

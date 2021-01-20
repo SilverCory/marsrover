@@ -1,12 +1,12 @@
-package MarsRover
+package marsrover
 
 import (
-	"MarsRover/interpreter"
-	"MarsRover/movement"
 	"bufio"
 	"errors"
 	"fmt"
 	"io"
+	"marsrover/interpreter"
+	"marsrover/movement"
 	"reflect"
 	"strings"
 )

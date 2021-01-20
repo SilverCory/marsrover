@@ -1,8 +1,8 @@
 package interpreter_test
 
 import (
-	. "MarsRover/interpreter"
-	"MarsRover/movement"
+	. "marsrover/interpreter"
+	"marsrover/movement"
 	"strconv"
 	"testing"
 

@@ -1,7 +1,7 @@
-package MarsRover_test
+package marsrover_test
 
 import (
-	"MarsRover/interpreter"
+	"marsrover/interpreter"
 	"strconv"
 )
 

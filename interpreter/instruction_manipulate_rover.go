@@ -1,10 +1,10 @@
 package interpreter
 
 import (
-	"MarsRover/movement"
 	"bytes"
 	"errors"
 	"fmt"
+	"marsrover/movement"
 	"strings"
 )
 

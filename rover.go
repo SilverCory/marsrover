@@ -1,6 +1,6 @@
-package MarsRover
+package marsrover
 
-import "MarsRover/movement"
+import "marsrover/movement"
 
 // Rover is the location, and location history of the rover.
 type Rover struct {

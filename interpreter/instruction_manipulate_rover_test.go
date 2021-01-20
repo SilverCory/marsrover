@@ -1,10 +1,10 @@
 package interpreter_test
 
 import (
-	"MarsRover/movement"
+	"marsrover/movement"
 	"testing"
 
-	. "MarsRover/interpreter"
+	. "marsrover/interpreter"
 
 	"github.com/stretchr/testify/assert"
 )

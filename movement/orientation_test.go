@@ -1,7 +1,7 @@
 package movement_test
 
 import (
-	. "MarsRover/movement"
+	. "marsrover/movement"
 	"testing"
 
 	"github.com/stretchr/testify/assert"

@@ -1,8 +1,8 @@
 package interpreter
 
 import (
-	"MarsRover/movement"
 	"fmt"
+	"marsrover/movement"
 	"strconv"
 	"strings"
 )

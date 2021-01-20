@@ -1,7 +1,7 @@
 package interpreter_test
 
 import (
-	. "MarsRover/interpreter"
+	. "marsrover/interpreter"
 	"reflect"
 	"testing"
 

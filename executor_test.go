@@ -1,8 +1,8 @@
-package MarsRover_test
+package marsrover_test
 
 import (
-	"MarsRover"
 	"errors"
+	"marsrover"
 	"strings"
 	"testing"
 
@@ -14,7 +14,7 @@ func Test(t *testing.T) {
 		t.Run(v.Name, func(t *testing.T) {
 			var (
 				reader   = strings.NewReader(v.Input)
-				executor = MarsRover.NewExecutor(reader)
+				executor = marsrover.NewExecutor(reader)
 				err      error
 			)
 
@@ -22,7 +22,7 @@ func Test(t *testing.T) {
 				err = executor.Tick()
 			}
 
-			if err == MarsRover.ErrorEndOfInstructions {
+			if err == marsrover.ErrorEndOfInstructions {
 				return
 			}
 
