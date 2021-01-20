@@ -49,6 +49,9 @@ func (o Orientation) String() string {
 	}
 }
 
+// OrientationFromString will return the orientation relevant to the supplied string.
+//
+// Error ErrorInvalidOrientation will be returned if an invalid string is supplied.
 func OrientationFromString(s string) (Orientation, error) {
 	s = strings.TrimSpace(s)
 	s = strings.ToUpper(s)

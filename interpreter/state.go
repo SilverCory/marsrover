@@ -9,8 +9,10 @@ var (
 	ErrorUnexpectedState = errors.New("unexpected state")
 )
 
+// State is an enumeration of application states.
 type State int
 
+// The states of the application.
 const (
 	_ State = iota
 	StateSetPlateau

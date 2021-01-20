@@ -16,11 +16,13 @@ var (
 // Used to ensure interface.
 var _ Instruction = &InstructionManipulateRover{}
 
+// InstructionManipulateRover is the instruction data for manipulating a rover.
 type InstructionManipulateRover struct {
 	Instruction
 	Manipulations []movement.Direction
 }
 
+// Decode parses the supplied string into a InstructionManipulateRover.
 func (i *InstructionManipulateRover) Decode(s string) (err error) {
 	parts := strings.Split(s, " ")
 	if len(parts) != 1 || strings.TrimSpace(parts[0]) == "" {
@@ -47,7 +49,7 @@ func manipulationFromByte(b byte) (movement.Direction, error) {
 		return movement.DirectionLeft, nil
 	case 'R':
 		return movement.DirectionRight, nil
-	case 'F':
+	case 'M':
 		return movement.DirectionFront, nil
 	default:
 		return 0, ErrorInvalidManipulation

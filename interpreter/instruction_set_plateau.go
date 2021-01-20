@@ -9,12 +9,14 @@ import (
 // Used to ensure interface.
 var _ Instruction = &InstructionSetPlateau{}
 
+// InstructionSetPlateau is the instruction data for setting up the plateau.
 type InstructionSetPlateau struct {
 	Instruction
 	MaxX int
 	MaxY int
 }
 
+// Decode parses the supplied string into a InstructionSetPlateau.
 func (i *InstructionSetPlateau) Decode(s string) (err error) {
 	parts := strings.Split(s, " ")
 	if len(parts) != 2 {

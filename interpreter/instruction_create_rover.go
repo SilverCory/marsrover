@@ -10,6 +10,7 @@ import (
 // Used to ensure interface.
 var _ Instruction = &InstructionCreateRover{}
 
+// InstructionCreateRover is the instruction data for creating a rover.
 type InstructionCreateRover struct {
 	Instruction
 	X           int
@@ -17,6 +18,7 @@ type InstructionCreateRover struct {
 	Orientation movement.Orientation
 }
 
+// Decode parses the supplied string into a InstructionCreateRover.
 func (i *InstructionCreateRover) Decode(s string) (err error) {
 	parts := strings.Split(s, " ")
 	if len(parts) != 3 {
