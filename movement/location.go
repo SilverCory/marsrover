@@ -20,6 +20,9 @@ type Location struct {
 	boundY int
 }
 
+// NewLocation will create a new location with the specified location, orientation and bounds.
+//
+// An error will be returned if any of the parameters are invalid or out of bounds.
 func NewLocation(X int, Y int, orientation Orientation, boundX int, boundY int) (Location, error) {
 	var ret = Location{
 		X:           X,
