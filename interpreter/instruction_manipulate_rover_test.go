@@ -22,6 +22,7 @@ func TestInstructionManipulateRover_Decode(t *testing.T) {
 		{"Valid_manipulate_RRRRR", "RRRRR", []movement.Direction{2, 2, 2, 2, 2}, nil},
 		{"Valid_manipulate_RRRRR", "FFFFF", []movement.Direction{3, 3, 3, 3, 3}, nil},
 		{"Valid_manipulate_LRFRLFFLR", "LRFRLFFL", []movement.Direction{1, 2, 3, 2, 1, 3, 3, 1}, nil},
+		{"Invalid_manipulate_PPPPP", "PPPPP", nil, ErrorInvalidManipulation},
 		{"Invalid_manipulate_TooLong", "a a a", nil, ErrorInstructionInvalidLength},
 		{"Invalid_manipulate_TooShort", "", nil, ErrorInstructionInvalidLength},
 	}
