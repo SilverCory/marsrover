@@ -1,6 +1,9 @@
 package movement
 
-import "errors"
+import (
+	"errors"
+	"strings"
+)
 
 var (
 	// ErrorInvalidDirection occurs when the direction is neither DirectionLeft or DirectionRight.
@@ -15,7 +18,7 @@ const (
 	_ Direction = iota
 	DirectionLeft
 	DirectionRight
-	// Deprecated DirectionFront is only for use with the interpreter.
+	// Deprecated DirectionFront is only for use with the interpreter and executor.
 	DirectionFront
 )
 
@@ -26,5 +29,21 @@ func (d Direction) Validate() error {
 		return nil
 	default:
 		return ErrorInvalidDirection
+	}
+}
+
+func DirectionFromString(s string) (Direction, error) {
+	s = strings.TrimSpace(s)
+	s = strings.ToUpper(s)
+
+	switch s {
+	case "L":
+		return DirectionLeft, nil
+	case "R":
+		return DirectionRight, nil
+	case "M":
+		return DirectionFront, nil
+	default:
+		return 0, ErrorInvalidDirection
 	}
 }

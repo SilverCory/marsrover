@@ -12,32 +12,49 @@ import (
 
 func main() {
 	var (
-		inputFile string
-		verbose   bool
+		inputFile  string
+		outputFile string
 	)
 
 	flag.StringVar(&inputFile, "input", "input.txt", `The input is the path to a file containing instructions.
 Can be set to @std to read from the terminal input.`)
-	flag.BoolVar(&verbose, "verbose", false, "Output verbose logging.")
+	flag.StringVar(&outputFile, "output", "@std", `The output is the path to write a file containing the new locations of rovers.
+Can be set to @std to write to the terminal output.`)
 	flag.Parse()
 
 	var (
-		reader io.Reader
-		err    error
-		isStd  = inputFile == "@std"
+		reader   io.Reader
+		writer   io.WriteCloser
+		err      error
+		isStdIn  = inputFile == "@std"
+		isStdOut = outputFile == "@std"
 	)
 
-	// Set the reader.
-	if isStd {
-		reader = os.Stdin
-	} else {
-		reader, err = os.Open(inputFile)
-		if err != nil {
-			_, _ = fmt.Fprintf(os.Stderr, "Unable to open file: %s", err)
-			return
-		}
+	if reader, err = openReader(isStdIn, inputFile); err != nil {
+		_, _ = fmt.Fprintf(os.Stderr, "Unable to open input file: %s", err)
+		os.Exit(1)
+		return
 	}
 
+	if writer, err = openWriter(isStdOut, outputFile); err != nil {
+		_, _ = fmt.Fprintf(os.Stderr, "Unable to open output file: %s", err)
+		os.Exit(1)
+		return
+	}
+
+	// Ensure writer gets closed.
+	defer func() {
+		if isStdOut {
+			return // Don't close stdout.
+		}
+
+		if err := writer.Close(); err != nil {
+			_, _ = fmt.Fprintf(os.Stderr, "Unable to close output file: %s", err)
+			os.Exit(1)
+		}
+	}()
+
+	// Create executor instance.
 	var executor = marsrover.NewExecutor(reader)
 
 	// Capture a ctrl+c signal to exit program
@@ -46,17 +63,19 @@ Can be set to @std to read from the terminal input.`)
 		signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
 		<-sc
 
-		complete(executor)
+		complete(writer, executor)
 		os.Exit(0)
 	}()
-	if isStd {
+
+	// Output a message letting user know to Ctrl+C.
+	if isStdIn {
 		fmt.Println("Press Ctrl+C to complete and exit.")
 	}
 
 	// Application loop.
 	for err != marsrover.ErrorEndOfInstructions {
 		// Format console.
-		if isStd {
+		if isStdIn {
 			fmt.Print("> ")
 		}
 
@@ -66,13 +85,37 @@ Can be set to @std to read from the terminal input.`)
 		}
 	}
 
-	complete(executor)
+	// Output results.
+	complete(writer, executor)
+}
+
+// openReader will open the appropriate reader.
+func openReader(isStdIn bool, inputFile string) (reader io.Reader, err error) {
+	// Set the reader.
+	if isStdIn {
+		reader = os.Stdin
+	} else {
+		reader, err = os.Open(inputFile)
+	}
+
+	return reader, err
+}
+
+// openWriter will open the appropriate writer.
+func openWriter(isStdOut bool, outputFile string) (writer io.WriteCloser, err error) {
+	// Set the writer
+	if isStdOut {
+		writer = os.Stdout
+	} else {
+		writer, err = os.Create(outputFile)
+	}
+
+	return writer, err
 }
 
 // complete will output the locations of all rovers to stdout.
-func complete(executor marsrover.Executor) {
-	fmt.Print("\n----------\n")
+func complete(w io.Writer, executor marsrover.Executor) {
 	for _, v := range executor.Rovers {
-		fmt.Println(v.CurrentLocation)
+		_, _ = fmt.Fprintln(w, v.CurrentLocation)
 	}
 }

@@ -9,6 +9,30 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func TestProvided(t *testing.T) {
+	var (
+		v        = testCases[0] // The provided test.
+		reader   = strings.NewReader(v.Input)
+		executor = marsrover.NewExecutor(reader)
+		err      error
+	)
+
+	for err == nil {
+		err = executor.Tick()
+	}
+
+	// Output locations for proof.
+	for _, v := range executor.Rovers {
+		t.Log(v.CurrentLocation)
+	}
+
+	if err == marsrover.ErrorEndOfInstructions {
+		return
+	}
+
+	assert.Equal(t, v.ExpectedErr, unwrapError(err))
+}
+
 func Test(t *testing.T) {
 	for _, v := range testCases {
 		t.Run(v.Name, func(t *testing.T) {

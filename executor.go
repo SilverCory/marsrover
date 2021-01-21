@@ -113,8 +113,8 @@ func (e *Executor) executeInstructionManipulateRover(i *interpreter.InstructionM
 		}
 
 		if err != nil {
-			// TODO to return or not to return, that is the question.
-			fmt.Println(err)
+			// See Readme.md#Assumptions.
+			return err
 		}
 
 		rover.LocationHistory = append(rover.LocationHistory, rover.CurrentLocation)

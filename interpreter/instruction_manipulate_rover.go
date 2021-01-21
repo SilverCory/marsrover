@@ -31,8 +31,13 @@ func (i *InstructionManipulateRover) Decode(s string) (err error) {
 
 	byteParts := bytes.ToUpper([]byte(parts[0]))
 	for _, v := range byteParts {
-		manipulation, err := manipulationFromByte(v)
+		manipulation, err := movement.DirectionFromString(string(v))
 		if err != nil {
+			// Allow for better userfeedback.
+			if err == movement.ErrorInvalidDirection {
+				err = ErrorInvalidManipulation
+			}
+
 			return fmt.Errorf("invalid data: %q: %w", v, err)
 		}
 
@@ -40,18 +45,4 @@ func (i *InstructionManipulateRover) Decode(s string) (err error) {
 	}
 
 	return nil
-}
-
-// TODO move this to where it belongs.
-func manipulationFromByte(b byte) (movement.Direction, error) {
-	switch b {
-	case 'L':
-		return movement.DirectionLeft, nil
-	case 'R':
-		return movement.DirectionRight, nil
-	case 'M':
-		return movement.DirectionFront, nil
-	default:
-		return 0, ErrorInvalidManipulation
-	}
 }
