@@ -134,13 +134,6 @@ func TestLocation_Validate(t *testing.T) {
 	}
 }
 
-// doNothing returns a function that will return the same location supplied.
-func doNothing() func(Location) Location {
-	return func(l Location) Location {
-		return l
-	}
-}
-
 // setRelative returns a function that will set relative coordinates to the supplied Location.
 func setRelative(X, Y int) func(Location) Location {
 	return func(l Location) Location {
