@@ -66,13 +66,13 @@ func (e *Executor) Tick() error {
 }
 
 func (e *Executor) executeInstruction(i interpreter.Instruction) error {
-	switch i.(type) {
+	switch i := i.(type) {
 	case *interpreter.InstructionSetPlateau:
-		return e.executeInstructionSetPlateau(i.(*interpreter.InstructionSetPlateau))
+		return e.executeInstructionSetPlateau(i)
 	case *interpreter.InstructionCreateRover:
-		return e.executeInstructionCreateRover(i.(*interpreter.InstructionCreateRover))
+		return e.executeInstructionCreateRover(i)
 	case *interpreter.InstructionManipulateRover:
-		return e.executeInstructionManipulateRover(i.(*interpreter.InstructionManipulateRover))
+		return e.executeInstructionManipulateRover(i)
 	default:
 		panic(fmt.Sprintf("invalid instruction: %v", i))
 	}
