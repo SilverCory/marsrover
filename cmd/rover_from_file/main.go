@@ -60,7 +60,7 @@ Can be set to @std to write to the terminal output.`)
 	// Capture a ctrl+c signal to exit program
 	go func() {
 		sc := make(chan os.Signal, 1)
-		signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
+		signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 		<-sc
 
 		complete(writer, executor)
