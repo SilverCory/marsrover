@@ -1,6 +1,6 @@
 Mars Rover
 ===
-[![Coverage Status](https://coveralls.io/repos/github/SilverCory/supreme-couscous/badge.svg?branch=master)](https://coveralls.io/github/SilverCory/supreme-couscous?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/SilverCory/marsrover/badge.svg?branch=master)](https://coveralls.io/github/SilverCory/marsrover?branch=master)
 
 A tech test.
 
