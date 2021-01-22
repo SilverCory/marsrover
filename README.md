@@ -12,6 +12,15 @@ To run a command line program that will take an input file (input.txt) and write
 $ go run ./cmd/rover_from_file
 ```
 
+The command line application can take some arguments.
+- `-input {filename}`
+  - The input file of commands, defaults to `input.txt`
+  - If set to `@std` the application will read the terminal input.
+- `-output {filename}`
+  - The output file of rover locations. Defaults to the terminal output.
+  - If set to `@std` the application will write to the terminal output.
+  - If set to a filepath the application will create and overwrite the file.
+
 Alternately the required testcase can be found in the unit test at ./executor_test.go:13 and run using:
 ```bash
 # run the test containing the supplied data.
